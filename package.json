@@ -19,5 +19,10 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.6"
+  },
+  "overrides": {
+    "@astrojs/tailwind": {
+      "astro": "^6.4.4"
+    }
   }
 }
