@@ -1,0 +1,152 @@
+{
+  "personalInfo": {
+    "name": "Ho Jun Hong",
+    "email": "junhongho25@gmail.com",
+    "phone": "+84 937 694 657",
+    "location": "Ho Chi Minh City, Vietnam",
+    "linkedin": "https://linkedin.com/in/jun-hong-ho-a82a57288",
+    "github": "https://github.com/LIONH456"
+  },
+  "summary": "Final-year Bachelor of Management Information Systems (MIS) student with strong interests in backend engineering, enterprise application development, and scalable software architecture. Experienced in designing and developing RESTful APIs using Java 21, Spring Boot, Spring Data JPA, and Hibernate. Demonstrated ability to build full-stack applications from concept to deployment, including Docker containerization, AWS EC2 hosting, database design, API documentation, and automated testing. Developed multiple production-deployed projects involving AI integration, payment systems, cloud deployment, and database management. Strong understanding of software engineering principles including layered architecture, DTO patterns, dependency injection, validation, exception handling, and test-driven quality practices.",
+  "roles": [
+    "Java Developer",
+    "Software Engineer",
+    "QA Automation Specialist"
+  ],
+  "skills": {
+    "programming": [
+      "Java",
+      "Python",
+      "JavaScript",
+      "Flutter/Dart",
+      "C++",
+      "PHP"
+    ],
+    "backend": [
+      "Spring Boot",
+      "Spring MVC",
+      "Spring Data JPA",
+      "Hibernate",
+      "REST APIs",
+      "FastAPI",
+      "Django",
+      "Layered Architecture",
+      "DTO Pattern",
+      "MapStruct",
+      "JWT Authentication",
+      "Spring Security"
+    ],
+    "qaAndTesting": [
+      "JUnit 5",
+      "Mockito",
+      "MockMvc",
+      "Integration Testing",
+      "API Testing",
+      "Postman",
+      "H2 Database",
+      "JaCoCo",
+      "Testcontainers"
+    ],
+    "databases": [
+      "MySQL",
+      "MongoDB",
+      "Oracle SQL",
+      "H2 Database"
+    ],
+    "devops": [
+      "Docker",
+      "Docker Compose",
+      "AWS EC2",
+      "Linux",
+      "Git/GitHub",
+      "Nginx",
+      "Jira",
+      "Swagger/OpenAPI"
+    ],
+    "languages": [
+      "Vietnamese (Native)",
+      "English (Professional Working Proficiency)",
+      "Chinese (Intermediate - HSK 6)",
+      "Khmer (Professional Working Proficiency)"
+    ]
+  },
+  "projects": [
+    {
+      "name": "SmartSpend AI",
+      "role": "Solo Full-Stack Developer",
+      "duration": "May 2026 - Present",
+      "techStack": "Java 21, Spring Boot, MySQL, Flutter, Gemini API, Docker, JUnit 5, Mockito, MockMvc",
+      "description": "Developed a full-stack expense management platform using Spring Boot and Flutter following layered architecture principles.",
+      "highlights": [
+        "Designed and implemented RESTful APIs for transaction management, filtering, validation, and pagination.",
+        "Integrated Google Gemini API to transform natural-language inputs into structured financial records.",
+        "Implemented JWT authentication for secure multi-user account management.",
+        "Developed comprehensive unit and integration tests using JUnit 5, Mockito, MockMvc, and H2 Database.",
+        "Containerized application services using Docker and managed source code using Git."
+      ],
+      "github": "https://github.com/LIONH456/SmartSpendCopilot",
+      "qaFocus": true,
+      "testCoverage": "JUnit 5, Mockito, MockMvc, H2 Database for service and controller layer testing"
+    },
+    {
+      "name": "Hotel Management System",
+      "role": "Solo Backend Developer",
+      "duration": "Dec 2025 - April 2026",
+      "techStack": "Java 21, Spring Boot, Spring Security, JWT, MySQL, MongoDB, Testcontainers, JaCoCo",
+      "description": "Developed a hotel management backend supporting reservations, payments, invoicing, and reporting through RESTful APIs.",
+      "highlights": [
+        "Designed and implemented 50+ RESTful API endpoints with JWT authentication, role-based access control, request validation, exception handling, and DTO-based API contracts.",
+        "Designed relational database schemas using MySQL and Spring Data JPA.",
+        "Applied layered architecture, validation, exception handling, and automated testing with JUnit and Testcontainers.",
+        "Configured integration-testing environments with Testcontainers and established code coverage monitoring through JaCoCo."
+      ],
+      "github": "https://github.com/LIONH456/Hotel_Booking_Management",
+      "qaFocus": true,
+      "testCoverage": "Testcontainers for integration testing, JaCoCo for code coverage analysis"
+    },
+    {
+      "name": "Fashion E-Commerce Platform",
+      "role": "Full-Stack Developer",
+      "duration": "Aug 2025 - Nov 2025",
+      "techStack": "Python, Django, MongoDB, Docker, AWS EC2, PayPal, Bakong KHQR",
+      "description": "Built an e-commerce platform supporting product management, shopping carts, and order processing workflows.",
+      "highlights": [
+        "Built an e-commerce platform supporting product management, shopping carts, and order processing workflows.",
+        "Integrated PayPal Sandbox and Bakong KHQR payment gateways.",
+        "Developed administrative dashboards and inventory management features.",
+        "Deployed applications using Docker on AWS EC2 environments."
+      ],
+      "github": "https://github.com/LIONH456/DJango_SU2_ECommerce",
+      "qaFocus": false
+    }
+  ],
+  "education": {
+    "degree": "Bachelor of Management Information Systems (MIS)",
+    "institution": "SETEC Institute",
+    "expectedGraduation": "December 2026",
+    "foundationGPA": "3.89 / 4.0",
+    "note": "Available for full-time employment"
+  },
+  "certifications": [
+    {
+      "name": "TOEFL ITP",
+      "score": 517,
+      "description": "Demonstrates professional-level English reading, listening, and comprehension capabilities."
+    },
+    {
+      "name": "HSK Level 6",
+      "score": 241,
+      "description": "Demonstrates advanced Chinese language proficiency. Fully capable of understanding highly complex written materials and communicating effectively in diverse professional contexts."
+    }
+  ],
+  "strengths": [
+    "Backend System Development using Java Spring Boot ecosystem",
+    "Proactive Self-Learning Ability with production tech stacks",
+    "API Architecture & Integration with third-party vendors",
+    "Software Testing Mindset prioritizing code reliability",
+    "Cloud Deployment & Environment Orchestration with Docker",
+    "Technical Documentation with Swagger UI and Markdown",
+    "Problem Solving & Debugging with deployment optimization",
+    "AI-Assisted Development Productivity with LLM tools"
+  ]
+}

@@ -1,0 +1,583 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactForm from '../components/ContactForm.astro';
+import LanguagePicker from '../components/LanguagePicker.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { useTranslations } from '../i18n/utils';
+
+// Import CV data
+import enData from '../content/cv/en.json';
+
+const lang = 'en';
+const cvData = enData;
+const t = useTranslations(lang);
+---
+
+<Layout title={`${cvData.personalInfo.name} - Portfolio`} lang={lang}>
+  <Navbar currentLang={lang} slot="navbar">
+    <LanguagePicker currentLang={lang} slot="language-picker" />
+    <ThemeToggle slot="theme-toggle" />
+  </Navbar>
+
+  <div class="overflow-hidden bg-dot-pattern">
+    <!-- Home Section (Hero) -->
+    <section id="home" class="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+      <!-- Premium Background Elements -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 dark:bg-blue-600/5 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 dark:bg-purple-600/5 rounded-full blur-[120px] animate-pulse" style="animation-delay: 2s;"></div>
+      </div>
+
+      <div class="section-container relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Left: Text Content -->
+          <div class="order-2 lg:order-1 text-center lg:text-left">
+            <div class="mb-8 flex flex-wrap gap-3 justify-center lg:justify-start animate-in">
+              {cvData.roles.map((role) => (
+                <span class="skill-badge text-xs uppercase tracking-widest font-bold px-4 py-2 bg-blue-50/50 dark:bg-blue-900/20 border border-blue-100/50 dark:border-blue-800/50">
+                  {role}
+                </span>
+              ))}
+            </div>
+
+            <h1 class="text-5xl md:text-8xl font-black mb-8 animate-in tracking-tighter leading-none">
+              <span class="gradient-text pb-4 inline-block">{cvData.personalInfo.name}</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed animate-in font-medium" style="animation-delay: 0.1s;">
+              {t('hero.subtitle')}
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start animate-in" style="animation-delay: 0.2s;">
+              <a href="#projects" class="btn-primary shadow-blue-500/25 shadow-xl px-8 py-4 text-lg">
+                {t('hero.cta')}
+              </a>
+              <a href="#contact" class="btn-outline px-8 py-4 text-lg">
+                {t('hero.getInTouch')}
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Profile Image with Badge (1x1 Square) -->
+          <div class="order-1 lg:order-2 flex justify-center lg:justify-end animate-in" style="animation-delay: 0.15s;">
+            <div class="relative group">
+              <div class="absolute inset-0 bg-blue-600/10 dark:bg-blue-600/20 rounded-3xl translate-x-4 translate-y-4 transition-transform group-hover:translate-x-6 group-hover:translate-y-6"></div>
+              <div class="relative w-72 h-72 md:w-[450px] md:h-[450px] rounded-3xl overflow-hidden ring-1 ring-gray-200 dark:ring-gray-800 shadow-2xl transition-all duration-500 group-hover:scale-[1.02] -rotate-2 group-hover:rotate-0 animate-float aspect-square">
+                <img 
+                  src="/assets/profile.jpg" 
+                  alt={cvData.personalInfo.name} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+              </div>
+              
+              <!-- Badge moved to Home -->
+              <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800 p-4 flex items-center justify-center animate-bounce z-20" style="animation-duration: 4s;">
+                <div class="text-center">
+                  <p class="text-4xl font-black gradient-text leading-none mb-1">3+</p>
+                  <p class="text-[10px] uppercase tracking-[0.2em] font-black text-gray-400 dark:text-gray-500">Years Exp.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-24 md:py-32 relative border-t border-gray-100 dark:border-gray-800/60" id="about">
+      <div class="section-container">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <!-- Left: Pure Profile Image (1x1 Square) -->
+          <div class="flex justify-center lg:justify-start animate-in">
+            <div class="relative group">
+              <div class="absolute inset-0 bg-purple-600/10 dark:bg-purple-600/20 rounded-3xl -translate-x-4 translate-y-4 transition-transform group-hover:-translate-x-6 group-hover:translate-y-6"></div>
+              <div class="relative w-72 h-72 md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden ring-1 ring-gray-200 dark:ring-gray-800 shadow-2xl transition-all duration-500 group-hover:scale-[1.02] rotate-2 group-hover:rotate-0 aspect-square">
+                <img 
+                  src="/assets/about-profile.jpg" 
+                  alt="Working context" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Summary Text -->
+          <div class="text-left">
+            <h2 class="text-4xl md:text-6xl font-black mb-12 gradient-text inline-block tracking-tighter uppercase">{t('about.title')}</h2>
+            
+            <div class="space-y-8 relative">
+              <div class="absolute -left-8 top-2 bottom-2 w-1.5 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 rounded-full opacity-30 shadow-[0_0_15px_rgba(37,99,235,0.3)]"></div>
+              
+              <div class="relative">
+                <p class="text-2xl md:text-3xl text-gray-900 dark:text-white leading-tight font-black tracking-tight mb-6">
+                  {lang === 'zh' ? '致力于构建高可靠、可扩展的后端架构。' : lang === 'vi' ? 'Cam kết xây dựng kiến trúc backend có khả năng mở rộng và độ tin cậy cao.' : 'Committed to building high-reliability, scalable backend architectures.'}
+                </p>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+                  {cvData.summary}
+                </p>
+              </div>
+
+              <div class="flex flex-wrap gap-4 pt-4">
+                <div class="px-5 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-full text-xs font-black uppercase tracking-widest text-gray-500">
+                  # Backend_Engineer
+                </div>
+                <div class="px-5 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-full text-xs font-black uppercase tracking-widest text-gray-500">
+                  # Java_Specialist
+                </div>
+                <div class="px-5 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-full text-xs font-black uppercase tracking-widest text-gray-500">
+                  # QA_Automation
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-10 pt-12 border-t border-gray-100 dark:border-gray-800/60 relative">
+              <div class="group/info">
+                <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4 font-black group-hover/info:text-blue-600 transition-colors">{t('hero.email')}</p>
+                <a href={`mailto:${cvData.personalInfo.email}`} class="text-gray-900 dark:text-white font-black hover:text-blue-600 dark:hover:text-blue-400 transition-all text-base break-all block">
+                  {cvData.personalInfo.email}
+                </a>
+              </div>
+              <div class="group/info">
+                <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4 font-black group-hover/info:text-blue-600 transition-colors">{t('hero.location')}</p>
+                <p class="font-black text-gray-900 dark:text-white text-base">{cvData.personalInfo.location}</p>
+              </div>
+              <div class="group/info">
+                <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4 font-black group-hover/info:text-blue-600 transition-colors">{t('hero.phone')}</p>
+                <a href={`tel:${cvData.personalInfo.phone}`} class="text-gray-900 dark:text-white font-black hover:text-blue-600 dark:hover:text-blue-400 transition-all text-base block">
+                  {cvData.personalInfo.phone}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-24 md:py-32 bg-gray-50/50 dark:bg-gray-900/30 border-y border-gray-200/60 dark:border-gray-800/60" id="skills">
+      <div class="section-container">
+        <h2 class="text-4xl md:text-5xl font-bold mb-20 gradient-text text-center pb-2">{t('skills.title')}</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Programming -->
+          <div class="card fade-in-on-scroll group">
+            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+              </span>
+              {t('skills.programming')}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {cvData.skills.programming.map((skill) => (
+                <span class="skill-badge text-xs px-3 py-1.5">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div class="card fade-in-on-scroll group">
+            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v4M7 7h10"></path></svg>
+              </span>
+              {t('skills.backend')}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {cvData.skills.backend.map((skill) => (
+                <span class="skill-badge text-xs px-3 py-1.5">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- QA & Testing -->
+          <div class="card fade-in-on-scroll group">
+            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </span>
+              {t('skills.qa')}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {cvData.skills.qaAndTesting.map((skill) => (
+                <span class="skill-badge text-xs px-3 py-1.5">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Databases -->
+          <div class="card fade-in-on-scroll group">
+            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center text-yellow-600 dark:text-yellow-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4m0 5c0 2.21-3.58 4-8 4s-8-1.79-8-4"></path></svg>
+              </span>
+              {t('skills.databases')}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {cvData.skills.databases.map((skill) => (
+                <span class="skill-badge text-xs px-3 py-1.5">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- DevOps -->
+          <div class="card fade-in-on-scroll group">
+            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+              </span>
+              {t('skills.devops')}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {cvData.skills.devops.map((skill) => (
+                <span class="skill-badge text-xs px-3 py-1.5">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="card fade-in-on-scroll group">
+            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center text-pink-600 dark:text-pink-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+              </span>
+              {t('skills.languages')}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {cvData.skills.languages.map((lang) => (
+                <span class="skill-badge text-xs px-3 py-1.5">
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testing & QA Section -->
+    <section class="py-24 md:py-32" id="testing">
+      <div class="section-container">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text text-center fade-in-on-scroll pb-2">
+            {t('testing.title')}
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-20 fade-in-on-scroll font-medium">
+            {t('testing.subtitle')}
+          </p>
+
+          <div class="space-y-12">
+            {cvData.projects.filter((p) => p.qaFocus).map((project) => (
+              <div class="card p-0 overflow-hidden fade-in-on-scroll border border-gray-100 dark:border-gray-800/60 group hover:border-blue-500/30 transition-all duration-500">
+                <div class="grid grid-cols-1 md:grid-cols-12">
+                  <!-- Left: Tech & Strategy -->
+                  <div class="md:col-span-5 p-8 md:p-10 bg-gray-50/50 dark:bg-gray-800/20 border-b md:border-b-0 md:border-r border-gray-100 dark:border-gray-800/60">
+                    <h4 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {project.name}
+                    </h4>
+                    
+                    <div class="space-y-6">
+                      <div>
+                        <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 dark:text-gray-500 mb-3">Testing Stack</p>
+                        <div class="flex flex-wrap gap-2">
+                          {project.techStack.split(',').filter(t => t.includes('JUnit') || t.includes('Mockito') || t.includes('MockMvc') || t.includes('Testcontainers') || t.includes('JaCoCo') || t.includes('H2')).map((tech) => (
+                            <span class="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-bold text-gray-700 dark:text-gray-300 shadow-sm">
+                              {tech.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div class="pt-4 border-t border-gray-200 dark:border-gray-700/50">
+                        <div class="flex items-center gap-3 text-sm font-bold text-blue-600 dark:text-blue-400">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                          Quality Assurance Focus
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Right: Metrics & Philosophy -->
+                  <div class="md:col-span-7 p-8 md:p-10 flex flex-col justify-center">
+                    <div class="mb-8">
+                       <div class="flex justify-between items-end mb-4">
+                          <div>
+                            <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 dark:text-gray-500 mb-1">Coverage Philosophy</p>
+                            <h5 class="text-lg font-bold text-gray-900 dark:text-white">Reliability Metrics</h5>
+                          </div>
+                          <div class="text-right">
+                            <span class="text-3xl font-black gradient-text">High</span>
+                          </div>
+                       </div>
+                       <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 italic">
+                         "{project.testCoverage}"
+                       </p>
+                       
+                       <!-- Progress Bar -->
+                       <div class="w-full bg-gray-100 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
+                          <div class="bg-gradient-to-r from-blue-600 to-purple-600 h-full rounded-full w-[85%] group-hover:w-[92%] transition-all duration-1000 ease-out"></div>
+                       </div>
+                       <div class="flex justify-between mt-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                          <span>Unit</span>
+                          <span>Integration</span>
+                          <span>End-to-End</span>
+                       </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                       <div class="p-4 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl border border-gray-100 dark:border-gray-700/50">
+                          <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">Automation</p>
+                          <p class="text-sm font-bold text-gray-900 dark:text-white">Full CI/CD Ready</p>
+                       </div>
+                       <div class="p-4 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl border border-gray-100 dark:border-gray-700/50">
+                          <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">Validation</p>
+                          <p class="text-sm font-bold text-gray-900 dark:text-white">Strict DTO Checks</p>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="py-24 md:py-32 bg-gray-50/50 dark:bg-gray-900/30 border-y border-gray-200/60 dark:border-gray-800/60" id="projects">
+      <div class="section-container">
+        <h2 class="text-4xl md:text-5xl font-bold mb-20 gradient-text text-center pb-2">{t('projects.title')}</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {cvData.projects.map((project, index) => (
+            <div class="card p-0 overflow-hidden fade-in-on-scroll flex flex-col group">
+              <div class="p-8 flex-grow">
+                {/* QA Badge if applicable */}
+                {project.qaFocus && (
+                  <div class="mb-6">
+                    <span class="px-4 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-bold uppercase tracking-widest border border-green-200 dark:border-green-800">
+                      {t('projects.qa')}
+                    </span>
+                  </div>
+                )}
+
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {project.name}
+                </h3>
+                
+                <p class="text-sm text-blue-600 dark:text-blue-400 font-bold mb-6 uppercase tracking-widest">
+                  {project.role} • {project.duration}
+                </p>
+
+                <p class="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                  {project.description}
+                </p>
+
+                <div class="mb-8">
+                  <p class="text-xs font-bold text-gray-400 dark:text-gray-500 mb-4 uppercase tracking-widest">{t('projects.tech')}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {project.techStack.split(',').map((tech) => (
+                      <span class="skill-badge text-xs px-3 py-1.5">
+                        {tech.trim()}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div class="mb-8">
+                  <p class="text-xs font-bold text-gray-400 dark:text-gray-500 mb-4 uppercase tracking-widest">{t('projects.highlights')}</p>
+                  <ul class="space-y-3">
+                    {project.highlights.slice(0, 3).map((highlight) => (
+                      <li class="text-sm text-gray-600 dark:text-gray-400 flex gap-3 items-start">
+                        <span class="text-blue-600 dark:text-blue-400 mt-1">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div class="p-6 bg-gray-50/50 dark:bg-gray-800/30 border-t border-gray-100 dark:border-gray-800 mt-auto">
+                <a href={project.github} target="_blank" rel="noopener" class="btn-outline w-full flex items-center justify-center gap-2 py-3 text-sm">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  {t('projects.viewGithub')}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="py-24 md:py-32" id="education">
+      <div class="section-container">
+        <h2 class="text-4xl md:text-5xl font-bold mb-20 gradient-text text-center pb-2">{t('education.title')}</h2>
+
+        <div class="max-w-3xl mx-auto space-y-12">
+          <!-- Education Card -->
+          <div class="card p-10 fade-in-on-scroll relative group">
+            <div class="absolute left-0 top-0 w-2 h-full bg-blue-600 rounded-l-xl transition-all group-hover:w-3"></div>
+            <h3 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+              {cvData.education.degree}
+            </h3>
+            <p class="text-xl text-blue-600 dark:text-blue-400 font-bold mb-6">
+              {cvData.education.institution}
+            </p>
+            <div class="space-y-4 text-lg text-gray-600 dark:text-gray-400">
+              <div class="flex items-center gap-3">
+                <span class="text-gray-400 font-bold uppercase tracking-widest text-xs w-32">{t('education.expected')}</span>
+                <span class="font-bold text-gray-900 dark:text-white">{cvData.education.expectedGraduation}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-gray-400 font-bold uppercase tracking-widest text-xs w-32">{t('education.gpa')}</span>
+                <span class="font-bold text-gray-900 dark:text-white">{cvData.education.foundationGPA}</span>
+              </div>
+              <p class="text-sm italic text-green-600 dark:text-green-400 pt-4 border-t border-gray-100 dark:border-gray-800">{cvData.education.note}</p>
+            </div>
+          </div>
+
+          <!-- Certifications Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {cvData.certifications.map((cert) => (
+              <div class="card p-8 fade-in-on-scroll border-b-4 border-b-purple-500">
+                <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                  {cert.name}
+                </h4>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">{t('education.score')}</span>
+                  <span class="px-3 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-lg font-bold">
+                    {cert.score}
+                  </span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {cert.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentials & Global Presence -->
+    <section class="py-24 md:py-32 bg-gray-50/50 dark:bg-gray-900/30 border-y border-gray-200/60 dark:border-gray-800/60" id="credentials">
+      <div class="section-container">
+        <h2 class="text-4xl md:text-5xl font-bold mb-20 gradient-text text-center pb-2">{t('credentials.title')}</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+          <!-- Languages -->
+          <div>
+            <h3 class="text-2xl font-bold mb-10 text-gray-900 dark:text-white flex items-center gap-3">
+               <span class="w-2 h-8 bg-blue-600 rounded-full"></span>
+               {t('credentials.languages')}
+            </h3>
+            <div class="space-y-6">
+              {cvData.skills.languages.map((lang) => (
+                <div class="card fade-in-on-scroll p-6 group hover:border-blue-500 transition-colors">
+                  <p class="font-bold text-lg text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{lang}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Certifications Summary -->
+          <div>
+            <h3 class="text-2xl font-bold mb-10 text-gray-900 dark:text-white flex items-center gap-3">
+               <span class="w-2 h-8 bg-purple-600 rounded-full"></span>
+               {t('credentials.certifications')}
+            </h3>
+            <div class="space-y-6">
+              {cvData.certifications.map((cert) => (
+                <div class="card fade-in-on-scroll p-6 group hover:border-purple-500 transition-colors">
+                  <p class="font-bold text-lg text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{cert.name}</p>
+                  <p class="text-sm font-bold text-blue-600 dark:text-blue-400 mt-2 uppercase tracking-widest">{t('education.score')}: {cert.score}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strengths Section -->
+    <section class="py-24 md:py-32">
+      <div class="section-container">
+        <h2 class="text-4xl md:text-5xl font-bold mb-20 gradient-text text-center pb-2">{t('strengths.title')}</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {cvData.strengths.map((strength) => (
+            <div class="card fade-in-on-scroll p-8 text-center hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-colors cursor-default">
+              <p class="text-xl font-bold text-gray-900 dark:text-white leading-relaxed">
+                {strength}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-24 md:py-32 bg-gray-50/50 dark:bg-gray-900/30 border-t border-gray-200/60 dark:border-gray-800/60 text-center relative overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div class="relative z-10 section-container">
+        <h2 class="text-4xl md:text-5xl font-bold mb-8 gradient-text inline-block pb-2">{t('cta.title')}</h2>
+        <p class="text-xl mb-16 max-w-2xl mx-auto text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+          {t('cta.subtitle')}
+        </p>
+        
+        <ContactForm currentLang={lang} />
+
+        <div class="mt-16 flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a href={cvData.personalInfo.linkedin} target="_blank" rel="noopener" class="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 font-bold uppercase tracking-widest text-sm transition-colors flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            {t('cta.linkedin')}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px',
+  });
+
+  document.querySelectorAll('.fade-in-on-scroll').forEach((el) => {
+    observer.observe(el);
+  });
+</script>
+
+<style>
+  .fade-in-on-scroll.visible {
+    @apply opacity-100 translate-y-0;
+  }
+</style>

@@ -1,0 +1,162 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  currentLang: 'en' | 'zh' | 'vi';
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+---
+
+<div class="max-w-xl mx-auto">
+  <form id="contact-form" class="space-y-6 text-left bg-white/80 dark:bg-gray-900/40 backdrop-blur-xl p-8 rounded-2xl border border-gray-100 dark:border-gray-800/60 shadow-sm transition-all duration-300">
+    <div>
+      <label for="name" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-widest">
+        {t('contact.form.name')}
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="from_name"
+        required
+        class="w-full px-4 py-3 bg-gray-50/50 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+        placeholder={t('contact.form.name')}
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-widest">
+        {t('contact.form.email')}
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="reply_to"
+        required
+        class="w-full px-4 py-3 bg-gray-50/50 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+        placeholder="your@email.com"
+      />
+    </div>
+
+    <div>
+      <label for="subject" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-widest">
+        {t('contact.form.subject')}
+      </label>
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        required
+        value={t('contact.form.defaultSubject')}
+        class="w-full px-4 py-3 bg-gray-50/50 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+      />
+    </div>
+
+    <div>
+      <label for="message" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-widest">
+        {t('contact.form.message')}
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="4"
+        required
+        class="w-full px-4 py-3 bg-gray-50/50 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white resize-none"
+        placeholder={t('contact.form.message')}
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      id="submit-btn"
+      class="w-full py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-xl hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-white transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+    >
+      <span id="btn-text">{t('contact.form.send')}</span>
+    </button>
+  </form>
+</div>
+
+<!-- Advanced Toast Notification System -->
+<div id="toast-container" class="fixed bottom-8 right-8 z-[100] flex flex-col gap-4 pointer-events-none"></div>
+
+<script define:vars={{ 
+  tSending: t('contact.form.sending'),
+  tSuccess: t('contact.form.success'),
+  tError: t('contact.form.error'),
+  tSend: t('contact.form.send')
+}}>
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const toastContainer = document.getElementById('toast-container');
+
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `
+      flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl
+      transform transition-all duration-500 translate-y-full opacity-0 pointer-events-auto
+      ${type === 'success' 
+        ? 'bg-white/90 dark:bg-gray-900/90 border-green-100 dark:border-green-900/30 text-green-600 dark:text-green-400' 
+        : 'bg-white/90 dark:bg-gray-900/90 border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400'}
+    `;
+    
+    const icon = type === 'success' 
+      ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>'
+      : '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>';
+
+    toast.innerHTML = `
+      <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${type === 'success' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}">
+        ${icon}
+      </div>
+      <p class="font-bold text-sm tracking-tight">${message}</p>
+    `;
+
+    toastContainer.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-y-full', 'opacity-0');
+    });
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+      toast.classList.add('translate-y-[-20px]', 'opacity-0');
+      setTimeout(() => toast.remove(), 500);
+    }, 5000);
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    
+    submitBtn.disabled = true;
+    btnText.textContent = tSending;
+
+    try {
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData.entries());
+
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        showToast(tSuccess, 'success');
+        form.reset();
+      } else {
+        throw new Error('Server error');
+      }
+
+    } catch (error) {
+      console.error('Submission failed:', error);
+      showToast(tError, 'error');
+    } finally {
+      submitBtn.disabled = false;
+      btnText.textContent = tSend;
+    }
+  }
+
+  form?.addEventListener('submit', handleSubmit);
+</script>

@@ -1,0 +1,190 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  currentLang: 'en' | 'zh' | 'vi';
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+
+const navItems = [
+  { href: '#home', label: t('nav.home') },
+  { href: '#about', label: t('nav.about') },
+  { href: '#skills', label: t('nav.skills') },
+  { href: '#testing', label: t('nav.testing') },
+  { href: '#projects', label: t('nav.projects') },
+  { href: '#education', label: t('nav.education') },
+  { href: '#credentials', label: t('nav.credentials') },
+  { href: '#contact', label: t('nav.contact') },
+];
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 z-50 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <a
+        href="#home"
+        class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+      >
+        HJH
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-8">
+        <div class="flex gap-6">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+        
+        <div class="h-6 w-px bg-gray-200 dark:border-gray-800"></div>
+
+        <div class="flex items-center gap-4">
+          <slot name="language-picker" />
+          <slot name="theme-toggle" />
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex md:hidden items-center gap-4">
+        <slot name="language-picker" />
+        <slot name="theme-toggle" />
+        <button
+          id="mobile-menu-button"
+          class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg
+            id="menu-icon"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+          <svg
+            id="close-icon"
+            class="w-6 h-6 hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 animate-in slide-in-from-top duration-300"
+  >
+    <div class="px-4 pt-2 pb-6 space-y-1">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="block px-4 py-3 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-all"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const navLinks = document.querySelectorAll('#mobile-menu a');
+
+  const toggleMenu = () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+    
+    // Prevent scrolling when menu is open
+    if (!mobileMenu?.classList.contains('hidden')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  };
+
+  mobileMenuButton?.addEventListener('click', toggleMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (!mobileMenu?.classList.contains('hidden')) {
+        toggleMenu();
+      }
+    });
+  });
+
+  // Close menu on resize if screen becomes large
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && !mobileMenu?.classList.contains('hidden')) {
+      toggleMenu();
+    }
+  });
+
+  // Active link on scroll
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        document.querySelectorAll('nav .nav-link').forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('text-blue-600', 'dark:text-blue-400', 'font-bold');
+            link.classList.remove('text-gray-600', 'dark:text-gray-300', 'font-medium');
+          } else {
+            link.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-bold');
+            if (link.getAttribute('href')?.startsWith('#')) {
+              link.classList.add('text-gray-600', 'dark:text-gray-300', 'font-medium');
+            }
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section[id]').forEach((section) => {
+    observer.observe(section);
+  });
+</script>
+
+<style>
+  #navbar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>

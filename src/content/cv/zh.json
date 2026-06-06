@@ -1,0 +1,152 @@
+{
+  "personalInfo": {
+    "name": "何俊宏",
+    "email": "junhongho25@gmail.com",
+    "phone": "+84 937 694 657",
+    "location": "越南胡志明市",
+    "linkedin": "https://linkedin.com/in/jun-hong-ho-a82a57288",
+    "github": "https://github.com/LIONH456"
+  },
+  "summary": "管理信息系统（MIS）专业应届毕业生，对后端工程、企业应用开发和可扩展软件架构有浓厚兴趣。具有丰富的 Java 21、Spring Boot、Spring Data JPA 和 Hibernate 的 RESTful API 设计与开发经验。已成功将多个项目从概念阶段部署到生产环境，包括 Docker 容器化、AWS EC2 部署、数据库设计、API 文档生成和自动化测试。深入理解分层架构、DTO 模式、依赖注入、校验、异常处理和测试驱动开发等软件工程原理。热衷于构建可靠的后端系统，并持续拓展云计算技术、DevOps 和分布式系统方面的专业知识。",
+  "roles": [
+    "Java 开发工程师",
+    "软件工程师",
+    "QA 自动化专家"
+  ],
+  "skills": {
+    "programming": [
+      "Java",
+      "Python",
+      "JavaScript",
+      "Flutter/Dart",
+      "C++",
+      "PHP"
+    ],
+    "backend": [
+      "Spring Boot",
+      "Spring MVC",
+      "Spring Data JPA",
+      "Hibernate",
+      "REST API",
+      "FastAPI",
+      "Django",
+      "分层架构",
+      "DTO 模式",
+      "MapStruct",
+      "JWT 认证",
+      "Spring Security"
+    ],
+    "qaAndTesting": [
+      "JUnit 5",
+      "Mockito",
+      "MockMvc",
+      "集成测试",
+      "API 测试",
+      "Postman",
+      "H2 数据库",
+      "JaCoCo",
+      "Testcontainers"
+    ],
+    "databases": [
+      "MySQL",
+      "MongoDB",
+      "Oracle SQL",
+      "H2 数据库"
+    ],
+    "devops": [
+      "Docker",
+      "Docker Compose",
+      "AWS EC2",
+      "Linux",
+      "Git/GitHub",
+      "Nginx",
+      "Jira",
+      "Swagger/OpenAPI"
+    ],
+    "languages": [
+      "越南语（母语）",
+      "英语（专业工作水平）",
+      "中文（中级 - HSK 6 级）",
+      "高棉语（专业工作水平）"
+    ]
+  },
+  "projects": [
+    {
+      "name": "SmartSpend AI",
+      "role": "全栈开发工程师（独立）",
+      "duration": "2026 年 5 月 - 至今",
+      "techStack": "Java 21, Spring Boot, MySQL, Flutter, Gemini API, Docker, JUnit 5, Mockito, MockMvc",
+      "description": "开发了一个基于 Spring Boot 和 Flutter 的全栈智能费用管理平台，遵循分层架构原理。",
+      "highlights": [
+        "设计和实现了用于交易管理、筛选、校验和分页的 RESTful API。",
+        "集成 Google Gemini API，将自然语言输入转换为结构化的财务记录。",
+        "实现了 JWT 认证，确保多用户账户管理的安全性。",
+        "使用 JUnit 5、Mockito、MockMvc 和 H2 数据库开发了全面的单元测试和集成测试。",
+        "使用 Docker 容器化应用服务，并通过 Git 管理源代码。"
+      ],
+      "github": "https://github.com/LIONH456/SmartSpendCopilot",
+      "qaFocus": true,
+      "testCoverage": "JUnit 5、Mockito、MockMvc、H2 数据库用于服务层和控制器层测试"
+    },
+    {
+      "name": "酒店管理系统（HMS）",
+      "role": "后端开发工程师（独立）",
+      "duration": "2025 年 12 月 - 2026 年 4 月",
+      "techStack": "Java 21, Spring Boot, Spring Security, JWT, MySQL, MongoDB, Testcontainers, JaCoCo",
+      "description": "开发了支持预订、支付、发票和报告功能的酒店管理后端系统，通过 RESTful API 实现各项功能。",
+      "highlights": [
+        "设计和实现了 50+ 个 RESTful API 端点，包括 JWT 认证、基于角色的访问控制、请求校验、异常处理和 DTO 契约。",
+        "使用 MySQL 设计关系数据库模式，并通过 Spring Data JPA 进行数据访问。",
+        "应用分层架构、校验、异常处理，以及使用 JUnit 和 Testcontainers 的自动化测试。",
+        "使用 Testcontainers 配置集成测试环境，并通过 JaCoCo 建立代码覆盖率监控。"
+      ],
+      "github": "https://github.com/LIONH456/Hotel_Booking_Management",
+      "qaFocus": true,
+      "testCoverage": "Testcontainers 用于集成测试，JaCoCo 用于代码覆盖率分析"
+    },
+    {
+      "name": "时尚电商平台",
+      "role": "全栈开发工程师",
+      "duration": "2025 年 8 月 - 2025 年 11 月",
+      "techStack": "Python, Django, MongoDB, Docker, AWS EC2, PayPal, Bakong KHQR",
+      "description": "构建了支持商品管理、购物车和订单处理工作流的电商平台。",
+      "highlights": [
+        "构建了支持商品管理、购物车和订单处理工作流的电商平台。",
+        "集成了 PayPal 沙箱和 Bakong KHQR 支付网关。",
+        "开发了管理后台仪表板和库存管理功能。",
+        "使用 Docker 部署应用，并在 AWS EC2 环境中运行。"
+      ],
+      "github": "https://github.com/LIONH456/DJango_SU2_ECommerce",
+      "qaFocus": false
+    }
+  ],
+  "education": {
+    "degree": "管理信息系统学士学位（MIS）",
+    "institution": "SETEC 学院",
+    "expectedGraduation": "2026 年 12 月",
+    "foundationGPA": "3.89 / 4.0",
+    "note": "可全职工作"
+  },
+  "certifications": [
+    {
+      "name": "TOEFL ITP",
+      "score": 517,
+      "description": "证明具有专业级别的英语阅读、听力和理解能力。"
+    },
+    {
+      "name": "HSK 六级",
+      "score": 241,
+      "description": "证明具有高级中文语言水平。能够理解高度复杂的书面材料，并在多样化的专业环境中有效沟通。"
+    }
+  ],
+  "strengths": [
+    "使用 Java Spring Boot 生态系统进行后端系统开发",
+    "主动学习能力，掌握生产级技术栈",
+    "API 架构与第三方厂商集成",
+    "以测试为中心的开发思维，优先保证代码质量",
+    "使用 Docker 进行云部署和环境编排",
+    "使用 Swagger UI 和 Markdown 进行技术文档编写",
+    "问题求解和调试能力，优化部署流程",
+    "利用大语言模型工具提升开发生产力"
+  ]
+}

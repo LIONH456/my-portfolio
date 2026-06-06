@@ -1,0 +1,137 @@
+backend:
+  name: github
+  repo: LIONH456/my-portfolio
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+publish_mode: editorial_workflow
+media_folder: public/images
+public_folder: /images
+
+i18n:
+  structure: multiple_files
+  locales: [en, zh, vi]
+  default_locale: en
+
+collections:
+  - name: cv
+    label: CV / Resume
+    folder: src/content/cv
+    format: json
+    i18n: true
+    create: false
+    delete: false
+    files:
+      - name: en
+        label: English
+        file: en.json
+        i18n: true
+        fields:
+          - name: personalInfo
+            label: Personal Information
+            widget: object
+            i18n: false
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: email, label: Email, widget: string }
+              - { name: phone, label: Phone, widget: string }
+              - { name: location, label: Location, widget: string }
+              - { name: linkedin, label: LinkedIn URL, widget: string }
+              - { name: github, label: GitHub URL, widget: string }
+
+          - name: summary
+            label: Professional Summary
+            widget: text
+            i18n: true
+
+          - name: roles
+            label: Professional Roles
+            widget: list
+            i18n: false
+            field: { label: Role, name: role, widget: string }
+
+          - name: skills
+            label: Technical Skills
+            widget: object
+            i18n: false
+            fields:
+              - name: programming
+                label: Programming Languages
+                widget: list
+                field: { label: Skill, name: skill, widget: string }
+              - name: backend
+                label: Backend & Architecture
+                widget: list
+                field: { label: Skill, name: skill, widget: string }
+              - name: qaAndTesting
+                label: QA & Testing
+                widget: list
+                field: { label: Skill, name: skill, widget: string }
+              - name: databases
+                label: Databases
+                widget: list
+                field: { label: Skill, name: skill, widget: string }
+              - name: devops
+                label: DevOps & Tools
+                widget: list
+                field: { label: Skill, name: skill, widget: string }
+              - name: languages
+                label: Languages
+                widget: list
+                field: { label: Language, name: language, widget: string }
+
+          - name: projects
+            label: Projects
+            widget: list
+            i18n: false
+            fields:
+              - { name: name, label: Project Name, widget: string }
+              - { name: role, label: Role, widget: string }
+              - { name: duration, label: Duration, widget: string }
+              - { name: techStack, label: Tech Stack, widget: string, hint: 'Comma-separated list' }
+              - { name: description, label: Description, widget: text, i18n: true }
+              - name: highlights
+                label: Highlights
+                widget: list
+                i18n: true
+                field: { label: Highlight, name: highlight, widget: text }
+              - { name: github, label: GitHub URL, widget: string }
+              - { name: qaFocus, label: QA Focus Project, widget: boolean }
+              - { name: testCoverage, label: Test Coverage Info, widget: text }
+
+          - name: education
+            label: Education
+            widget: object
+            i18n: false
+            fields:
+              - { name: degree, label: Degree, widget: string, i18n: true }
+              - { name: institution, label: Institution, widget: string, i18n: true }
+              - { name: expectedGraduation, label: Expected Graduation, widget: string }
+              - { name: foundationGPA, label: Foundation GPA, widget: string }
+              - { name: note, label: Note, widget: string, i18n: true }
+
+          - name: certifications
+            label: Certifications
+            widget: list
+            i18n: false
+            fields:
+              - { name: name, label: Certification Name, widget: string, i18n: true }
+              - { name: score, label: Score, widget: string }
+              - { name: description, label: Description, widget: text, i18n: true }
+
+          - name: strengths
+            label: Key Strengths
+            widget: list
+            i18n: true
+            field: { label: Strength, name: strength, widget: string }
+
+      - name: zh
+        label: Chinese
+        file: zh.json
+        i18n: false
+
+      - name: vi
+        label: Vietnamese
+        file: vi.json
+        i18n: false

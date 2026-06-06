@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+import { useTranslations } from '../i18n/utils';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  lang: string;
+}
+
+const { title, lang } = Astro.props;
+const currentLang = lang as 'en' | 'zh' | 'vi';
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Ho Jun Hong - Backend Engineer, Software Developer, QA Automation Specialist"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="Ho Jun Hong - Backend Engineer, Software Developer, QA Automation Specialist"
+    />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#1f2937" />
+
+    <script is:inline>
+      // Handle theme persistence
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return 'dark';
+      })();
+
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style is:global>
+      html {
+        font-family:
+          'Plus Jakarta Sans',
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500"
+  >
+    <div class="min-h-screen flex flex-col">
+      <slot name="navbar" />
+
+      <!-- Main content -->
+      <main class="flex-grow">
+        <slot />
+      </main>
+
+      <!-- Footer -->
+      <Footer currentLang={currentLang} />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    @apply scroll-smooth;
+  }
+
+  /* Prevent flashing when changing theme */
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+</style>

@@ -1,0 +1,21 @@
+{
+  "name": "ho-jun-hong-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for Ho Jun Hong - Backend Engineer, Software Developer, QA Automation Specialist",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^6.4.4",
+    "autoprefixer": "^10.4.16",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6"
+  }
+}

@@ -1,0 +1,79 @@
+---
+interface Props {
+  currentLang: string;
+}
+
+const { currentLang } = Astro.props;
+
+// 使用 Twemoji 提供的纯 SVG 国旗图标，在任何系统（包括 Windows）上都能完美、统一显示成精致的小国旗
+const languages = [
+  { code: 'en', name: 'English', flagUrl: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ec-1f1e7.svg' }, // 🇬🇧
+  { code: 'zh', name: '中文', flagUrl: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e8-1f1f3.svg' }, // 🇨🇳
+  { code: 'vi', name: 'Tiếng Việt', flagUrl: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1fb-1f1f3.svg' }, // 🇻🇳
+];
+
+const getNewPath = (newLang: string) => {
+  const currentPath = Astro.url.pathname;
+  
+  let basePath = currentPath;
+  
+  if (currentLang === 'zh' && currentPath.startsWith('/zh')) {
+    basePath = currentPath.replace(/^\/zh/, '');
+  } else if (currentLang === 'vi' && currentPath.startsWith('/vi')) {
+    basePath = currentPath.replace(/^\/vi/, '');
+  }
+  
+  if (!basePath.startsWith('/')) {
+    basePath = '/' + basePath;
+  }
+  
+  if (newLang === 'en') {
+    return basePath === '/' ? '/' : basePath;
+  } else {
+    return `/${newLang}${basePath === '/' ? '' : basePath}`;
+  }
+};
+
+const currentLanguage = languages.find(l => l.code === currentLang) || languages[0];
+---
+
+<div class="relative group">
+  <button 
+    class="px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm font-medium"
+    aria-label="Select language"
+  >
+    <img src={currentLanguage.flagUrl} alt="" class="w-5 h-4 object-cover rounded-sm shadow-sm" />
+    
+    <span class="hidden sm:inline">
+      {currentLanguage.name}
+    </span>
+    <svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+
+  <div class="absolute right-0 mt-2 w-44 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200 dark:border-gray-700 z-50">
+    <div class="py-1.5">
+      {languages.map((lang) => (
+        <a
+          href={getNewPath(lang.code)}
+          class={`flex items-center gap-3 px-4 py-2 text-sm transition-colors ${
+            currentLang === lang.code
+              ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold'
+              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+          }`}
+          aria-current={currentLang === lang.code ? 'page' : undefined}
+        >
+          <img src={lang.flagUrl} alt="" class="w-5 h-4 object-cover rounded-sm shadow-sm" />
+          <span>{lang.name}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500;
+  }
+</style>

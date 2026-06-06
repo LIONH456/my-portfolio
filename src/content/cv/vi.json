@@ -1,0 +1,152 @@
+{
+  "personalInfo": {
+    "name": "Ho Jun Hong",
+    "email": "junhongho25@gmail.com",
+    "phone": "+84 937 694 657",
+    "location": "Thành phố Hồ Chí Minh, Việt Nam",
+    "linkedin": "https://linkedin.com/in/jun-hong-ho-a82a57288",
+    "github": "https://github.com/LIONH456"
+  },
+  "summary": "Sinh viên năm cuối chuyên ngành Hệ thống Thông tin Quản lý (MIS) với kinh nghiệm thực hành trong phát triển backend, thiết kế ứng dụng doanh nghiệp và kiến trúc phần mềm có khả năng mở rộng. Có kinh nghiệm phong phú trong thiết kế và phát triển REST API sử dụng Java 21, Spring Boot, Spring Data JPA và Hibernate. Đã chứng minh khả năng xây dựng các ứng dụng toàn bộ từ khái niệm đến triển khai, bao gồm containerization Docker, hosting AWS EC2, thiết kế cơ sở dữ liệu, tạo tài liệu API và kiểm thử tự động. Đã phát triển nhiều dự án triển khai trên production với sự tích hợp AI, hệ thống thanh toán, triển khai cloud và quản lý cơ sở dữ liệu. Hiểu sâu sắc về các nguyên tắc kỹ thuật phần mềm bao gồm kiến trúc phân lớp, mẫu DTO, tiêm phụ thuộc, xác thực, xử lý ngoại lệ và thực hành phát triển dựa trên bài kiểm tra.",
+  "roles": [
+    "Java Developer",
+    "Software Engineer",
+    "QA Automation Specialist"
+  ],
+  "skills": {
+    "programming": [
+      "Java",
+      "Python",
+      "JavaScript",
+      "Flutter/Dart",
+      "C++",
+      "PHP"
+    ],
+    "backend": [
+      "Spring Boot",
+      "Spring MVC",
+      "Spring Data JPA",
+      "Hibernate",
+      "REST API",
+      "FastAPI",
+      "Django",
+      "Kiến trúc phân lớp",
+      "Mẫu DTO",
+      "MapStruct",
+      "Xác thực JWT",
+      "Spring Security"
+    ],
+    "qaAndTesting": [
+      "JUnit 5",
+      "Mockito",
+      "MockMvc",
+      "Kiểm thử tích hợp",
+      "Kiểm thử API",
+      "Postman",
+      "Cơ sở dữ liệu H2",
+      "JaCoCo",
+      "Testcontainers"
+    ],
+    "databases": [
+      "MySQL",
+      "MongoDB",
+      "Oracle SQL",
+      "Cơ sở dữ liệu H2"
+    ],
+    "devops": [
+      "Docker",
+      "Docker Compose",
+      "AWS EC2",
+      "Linux",
+      "Git/GitHub",
+      "Nginx",
+      "Jira",
+      "Swagger/OpenAPI"
+    ],
+    "languages": [
+      "Tiếng Việt (Bản ngữ)",
+      "Tiếng Anh (Trình độ công việc chuyên nghiệp)",
+      "Tiếng Trung (Trung cấp - HSK 6)",
+      "Tiếng Khmer (Trình độ công việc chuyên nghiệp)"
+    ]
+  },
+  "projects": [
+    {
+      "name": "SmartSpend AI",
+      "role": "Nhà phát triển Full-Stack (Độc lập)",
+      "duration": "Tháng 5, 2026 - Hiện tại",
+      "techStack": "Java 21, Spring Boot, MySQL, Flutter, Gemini API, Docker, JUnit 5, Mockito, MockMvc",
+      "description": "Phát triển nền tảng quản lý chi tiêu toàn bộ sử dụng Spring Boot và Flutter theo các nguyên tắc kiến trúc phân lớp.",
+      "highlights": [
+        "Thiết kế và triển khai REST API cho quản lý giao dịch, lọc, xác thực và phân trang.",
+        "Tích hợp Google Gemini API để chuyển đổi đầu vào ngôn ngữ tự nhiên thành các bản ghi tài chính có cấu trúc.",
+        "Triển khai xác thực JWT để quản lý tài khoản đa người dùng an toàn.",
+        "Phát triển kiểm thử đơn vị và kiểm thử tích hợp toàn diện sử dụng JUnit 5, Mockito, MockMvc và cơ sở dữ liệu H2.",
+        "Containerization các dịch vụ ứng dụng bằng Docker và quản lý mã nguồn sử dụng Git."
+      ],
+      "github": "https://github.com/LIONH456/SmartSpendCopilot",
+      "qaFocus": true,
+      "testCoverage": "JUnit 5, Mockito, MockMvc, H2 Database cho kiểm thử lớp service và controller"
+    },
+    {
+      "name": "Hệ thống Quản lý Khách sạn",
+      "role": "Nhà phát triển Backend (Độc lập)",
+      "duration": "Tháng 12, 2025 - Tháng 4, 2026",
+      "techStack": "Java 21, Spring Boot, Spring Security, JWT, MySQL, MongoDB, Testcontainers, JaCoCo",
+      "description": "Phát triển backend quản lý khách sạn hỗ trợ đặt phòng, thanh toán, hóa đơn và báo cáo thông qua REST API.",
+      "highlights": [
+        "Thiết kế và triển khai 50+ REST API endpoint với xác thực JWT, kiểm soát truy cập dựa trên vai trò, xác thực yêu cầu, xử lý ngoại lệ và hợp đồng API dựa trên DTO.",
+        "Thiết kế lược đồ cơ sở dữ liệu quan hệ bằng MySQL và Spring Data JPA.",
+        "Áp dụng kiến trúc phân lớp, xác thực, xử lý ngoại lệ và kiểm thử tự động với JUnit và Testcontainers.",
+        "Cấu hình môi trường kiểm thử tích hợp bằng Testcontainers và thiết lập giám sát phạm vi bảo phủ mã thông qua JaCoCo."
+      ],
+      "github": "https://github.com/LIONH456/Hotel_Booking_Management",
+      "qaFocus": true,
+      "testCoverage": "Testcontainers cho kiểm thử tích hợp, JaCoCo cho phân tích phạm vi bảo phủ mã"
+    },
+    {
+      "name": "Nền tảng Thương mại điện tử Thời trang",
+      "role": "Nhà phát triển Full-Stack",
+      "duration": "Tháng 8, 2025 - Tháng 11, 2025",
+      "techStack": "Python, Django, MongoDB, Docker, AWS EC2, PayPal, Bakong KHQR",
+      "description": "Xây dựng nền tảng thương mại điện tử hỗ trợ quản lý sản phẩm, giỏ hàng và quy trình xử lý đơn hàng.",
+      "highlights": [
+        "Xây dựng nền tảng thương mại điện tử hỗ trợ quản lý sản phẩm, giỏ hàng và quy trình xử lý đơn hàng.",
+        "Tích hợp cổng thanh toán PayPal Sandbox và Bakong KHQR.",
+        "Phát triển bảng điều khiển quản trị và tính năng quản lý kho hàng.",
+        "Triển khai ứng dụng bằng Docker trên môi trường AWS EC2."
+      ],
+      "github": "https://github.com/LIONH456/DJango_SU2_ECommerce",
+      "qaFocus": false
+    }
+  ],
+  "education": {
+    "degree": "Cử nhân Hệ thống Thông tin Quản lý (MIS)",
+    "institution": "Học viện SETEC",
+    "expectedGraduation": "Tháng 12, 2026",
+    "foundationGPA": "3.89 / 4.0",
+    "note": "Sẵn sàng làm việc toàn thời gian"
+  },
+  "certifications": [
+    {
+      "name": "TOEFL ITP",
+      "score": 517,
+      "description": "Chứng minh khả năng đọc, nghe và hiểu tiếng Anh ở cấp độ chuyên nghiệp."
+    },
+    {
+      "name": "HSK Cấp 6",
+      "score": 241,
+      "description": "Chứng minh trình độ tiếng Trung nâng cao. Có khả năng hiểu các tài liệu được viết rất phức tạp và giao tiếp hiệu quả trong các bối cảnh chuyên nghiệp đa dạng."
+    }
+  ],
+  "strengths": [
+    "Phát triển hệ thống Backend sử dụng hệ sinh thái Java Spring Boot",
+    "Khả năng tự học chủ động với các stack công nghệ production",
+    "Kiến trúc API và tích hợp với các nhà cung cấp bên thứ ba",
+    "Tư duy phát triển dựa trên kiểm thử, ưu tiên độ tin cậy của mã",
+    "Triển khai Cloud và Orchestration môi trường bằng Docker",
+    "Tài liệu kỹ thuật sử dụng Swagger UI và Markdown",
+    "Giải quyết vấn đề và gỡ lỗi, tối ưu hóa quy trình triển khai",
+    "Tăng năng suất phát triển hỗ trợ bởi công cụ mô hình ngôn ngữ lớn"
+  ]
+}
