@@ -100,9 +100,17 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
   const EMAILJS_SERVICE_ID = serviceId;
   const EMAILJS_TEMPLATE_ID = templateId;
 
-  // Initialize EmailJS with your Public Key
+  // Initialize EmailJS with your Public Key (using the new object-based initialization)
   if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY) {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    emailjs.init({
+      publicKey: EMAILJS_PUBLIC_KEY,
+      // You can also add other global settings here if needed
+      blockHeadless: true,
+      limitRate: {
+        id: 'app',
+        throttle: 10000, // 10s
+      },
+    });
   }
 
   const form = document.getElementById('contact-form');
