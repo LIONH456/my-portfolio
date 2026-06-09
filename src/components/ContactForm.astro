@@ -8,10 +8,10 @@ interface Props {
 const { currentLang } = Astro.props;
 const t = useTranslations(currentLang);
 
-// 1. 在 Astro 后端部分，正常读取带 PUBLIC_ 前缀的环境变量
-const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
-const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
-const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+// Read from .env (Must start with PUBLIC_ to be accessible in client-side)
+const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 ---
 
 <div class="max-w-xl mx-auto">
@@ -84,6 +84,7 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 
 <div id="toast-container" class="fixed bottom-8 right-8 z-[100] flex flex-col gap-4 pointer-events-none"></div>
 
+<!-- Load EmailJS SDK -->
 <script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script define:vars={{ 
@@ -91,26 +92,27 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
   tSuccess: t('contact.form.success'),
   tError: t('contact.form.error'),
   tSend: t('contact.form.send'),
-  publicKey,
-  serviceId,
-  templateId
+  PUBLIC_KEY,
+  SERVICE_ID,
+  TEMPLATE_ID
 }}>
-  // 3. 此时可以直接在前端脚本中使用这些变量
-  const EMAILJS_PUBLIC_KEY = publicKey;
-  const EMAILJS_SERVICE_ID = serviceId;
-  const EMAILJS_TEMPLATE_ID = templateId;
+  // --- CONFIGURATION (Loaded from Environment Variables) ---
+  const EMAILJS_PUBLIC_KEY = PUBLIC_KEY;
+  const EMAILJS_SERVICE_ID = SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = TEMPLATE_ID;
 
-  // Initialize EmailJS with your Public Key (using the new object-based initialization)
+  console.log("ContactForm [v3.1.0-ENV] Loaded");
+
+  // Initialize EmailJS with your Public Key
   if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY) {
     emailjs.init({
       publicKey: EMAILJS_PUBLIC_KEY,
-      // You can also add other global settings here if needed
       blockHeadless: true,
-      limitRate: {
-        id: 'app',
-        throttle: 10000, // 10s
-      },
+      limitRate: { id: 'app', throttle: 10000 }
     });
+    console.log("EmailJS SDK Initialized from Env");
+  } else {
+    console.warn("EmailJS: Credentials missing in .env or Cloudflare settings.");
   }
 
   const form = document.getElementById('contact-form');
@@ -140,13 +142,7 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
     `;
 
     toastContainer.appendChild(toast);
-
-    // Animate in
-    requestAnimationFrame(() => {
-      toast.classList.remove('translate-y-full', 'opacity-0');
-    });
-
-    // Remove after 5 seconds
+    requestAnimationFrame(() => toast.classList.remove('translate-y-full', 'opacity-0'));
     setTimeout(() => {
       toast.classList.add('translate-y-[-20px]', 'opacity-0');
       setTimeout(() => toast.remove(), 500);
@@ -155,10 +151,16 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 
   async function handleSubmit(event) {
     event.preventDefault();
+    console.log("ContactForm: HandleSubmit triggered (Env Mode)");
     
     if (typeof emailjs === 'undefined') {
-      console.error('EmailJS SDK not loaded');
+      console.error('EmailJS SDK not loaded from CDN');
       showToast(tError, 'error');
+      return;
+    }
+
+    if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
+      alert("EmailJS credentials are not configured in your .env or Cloudflare dashboard!");
       return;
     }
 
@@ -166,22 +168,23 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
     btnText.textContent = tSending;
 
     try {
-      // Direct call to EmailJS SDK using the passed environment variables
+      console.log("EmailJS: Sending via SDK...");
       const result = await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         form
       );
 
+      console.log("EmailJS Success:", result);
+
       if (result.status === 200) {
         showToast(tSuccess, 'success');
         form.reset();
       } else {
-        throw new Error('EmailJS failed with status: ' + result.status);
+        throw new Error('EmailJS failed: ' + result.status);
       }
-
     } catch (error) {
-      console.error('Submission failed:', error);
+      console.error('EmailJS Error:', error);
       showToast(tError, 'error');
     } finally {
       submitBtn.disabled = false;
