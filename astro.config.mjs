@@ -4,10 +4,10 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   integrations: [tailwind()],
-  output: 'static',
+  output: 'server',
   adapter: cloudflare({
     imageService: 'passthrough',
-    mode: 'directory'
+    mode: 'advanced',
   }),
   i18n: {
     defaultLocale: 'en',
