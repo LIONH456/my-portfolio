@@ -7,6 +7,11 @@ interface Props {
 
 const { currentLang } = Astro.props;
 const t = useTranslations(currentLang);
+
+// 1. 在 Astro 后端部分，正常读取带 PUBLIC_ 前缀的环境变量
+const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 ---
 
 <div class="max-w-xl mx-auto">
@@ -77,15 +82,29 @@ const t = useTranslations(currentLang);
   </form>
 </div>
 
-<!-- Advanced Toast Notification System -->
 <div id="toast-container" class="fixed bottom-8 right-8 z-[100] flex flex-col gap-4 pointer-events-none"></div>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script define:vars={{ 
   tSending: t('contact.form.sending'),
   tSuccess: t('contact.form.success'),
   tError: t('contact.form.error'),
-  tSend: t('contact.form.send')
+  tSend: t('contact.form.send'),
+  publicKey,
+  serviceId,
+  templateId
 }}>
+  // 3. 此时可以直接在前端脚本中使用这些变量
+  const EMAILJS_PUBLIC_KEY = publicKey;
+  const EMAILJS_SERVICE_ID = serviceId;
+  const EMAILJS_TEMPLATE_ID = templateId;
+
+  // Initialize EmailJS with your Public Key
+  if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY) {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+
   const form = document.getElementById('contact-form');
   const submitBtn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
@@ -129,24 +148,28 @@ const t = useTranslations(currentLang);
   async function handleSubmit(event) {
     event.preventDefault();
     
+    if (typeof emailjs === 'undefined') {
+      console.error('EmailJS SDK not loaded');
+      showToast(tError, 'error');
+      return;
+    }
+
     submitBtn.disabled = true;
     btnText.textContent = tSending;
 
     try {
-      const formData = new FormData(event.target);
-      const data = Object.fromEntries(formData.entries());
+      // Direct call to EmailJS SDK using the passed environment variables
+      const result = await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        form
+      );
 
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
+      if (result.status === 200) {
         showToast(tSuccess, 'success');
         form.reset();
       } else {
-        throw new Error('Server error');
+        throw new Error('EmailJS failed with status: ' + result.status);
       }
 
     } catch (error) {
