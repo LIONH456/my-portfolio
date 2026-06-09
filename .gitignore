@@ -44,3 +44,6 @@ dist
 # Build output
 .astro
 dist/
+
+# Cloudflare Wrangler cache
+.wrangler/
